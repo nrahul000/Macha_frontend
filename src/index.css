@@ -1,0 +1,446 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #137a13;
+    /* Logo green */
+    --primary-dark: #0a4d0a;
+    /* Darker green */
+    --accent: #000000;
+    /* Logo black */
+    --light-bg: #ffffff;
+    /* White */
+    --card-bg: #ffffff;
+  --dark-card: #f5f9ff;
+  --border-color: #e5efff;
+  font-size: 16px;
+}
+
+/* Remove high contrast mode */
+/* html.high-contrast {
+  filter: contrast(1.5) brightness(1.1);
+} */
+
+html {
+  scroll-behavior: smooth;
+  /* Add reduced motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  @apply bg-white dark:bg-[#0a1120] text-slate-800 dark:text-slate-200 transition-colors duration-300;
+  font-feature-settings: "pnum" on, "lnum" on;
+}
+
+/* Focus styles for better keyboard navigation */
+:focus-visible {
+  @apply outline-none ring-2 ring-[#4dc8e7] ring-offset-2;
+}
+
+/* Custom scroll bar */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-100 dark:bg-slate-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400 dark:bg-slate-600;
+}
+
+/* Larger touch targets for mobile */
+@layer components {
+  .mobile-touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+  
+  /* Ensure buttons have proper spacing for touch */
+  button, 
+  [role="button"],
+  .button,
+  a.btn {
+    @apply md:min-h-[44px] touch-manipulation;
+  }
+  
+  /* Improve form field accessibility */
+  input, 
+  select, 
+  textarea {
+    @apply md:min-h-[44px];
+  }
+  
+  /* Ensure proper spacing for list items */
+  li {
+    @apply md:min-h-[32px];
+  }
+}
+
+/* Book Now button styles */
+.book-now-btn {
+  @apply px-4 py-2 bg-[#4dc8e7] text-white rounded-lg hover:bg-[#3bb5d4] transition-all duration-300 
+         flex items-center gap-1 text-sm font-medium shadow-md hover:shadow-lg;
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes float-delay {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(6, 182, 212, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.8);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-float-delay {
+  animation: float-delay 6s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* Transitions and animations */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-float,
+  .animate-float-delay,
+  .animate-pulse {
+    animation: none !important;
+  }
+}
+
+/* Focus styles for interactive elements with mouse/touch */
+.focus-ring-on-active:active {
+  @apply ring-2 ring-[#4dc8e7];
+}
+
+/* Loading animation */
+.skeleton {
+  @apply bg-slate-200 dark:bg-slate-700 animate-pulse rounded;
+}
+
+/* Fix for text visibility in light mode */
+.text-gradient {
+  @apply text-[#4dc8e7] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#4dc8e7] dark:to-[#3b8ee0];
+}
+
+/* Special case for headings that need to be visible in both modes */
+.light-visible-gradient {
+  @apply text-[#4dc8e7];
+}
+
+@media (prefers-color-scheme: dark) {
+  .light-visible-gradient {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-[#4dc8e7] to-[#3b8ee0];
+  }
+}
+
+@layer base {
+  /* Custom scroll bar */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-100 dark:bg-slate-800;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400 dark:bg-slate-600;
+  }
+
+  /* Improved focus styles for better accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-[#4dc8e7] ring-offset-1;
+  }
+  
+  /* Skip to content link for keyboard users */
+  .skip-to-content {
+    @apply absolute z-50 -top-12 left-0 px-4 py-3 bg-[#4dc8e7] text-white font-medium transition-all duration-200 focus:top-0;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply container mx-auto px-4 md:px-8 max-w-7xl;
+  }
+  
+  .section-padding {
+    @apply py-20 md:py-28;
+  }
+  
+  .btn {
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300 inline-flex items-center gap-2;
+  }
+  
+  .btn-primary {
+    @apply bg-cyan-500 hover:bg-cyan-600 text-white shadow-md hover:shadow-lg hover:shadow-cyan-500/20;
+  }
+  
+  .btn-secondary {
+    @apply bg-blue-500 hover:bg-blue-600 text-white shadow-md hover:shadow-lg hover:shadow-blue-500/20;
+  }
+
+  .btn-outline {
+    @apply border-2 border-cyan-500 text-cyan-500 hover:bg-cyan-500 hover:text-white;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-5xl font-bold font-display mb-4 text-slate-800 dark:text-white;
+  }
+  
+  .section-subtitle {
+    @apply text-lg text-slate-600 dark:text-slate-400 mb-12;
+  }
+  
+  /* Futuristic card with hover effect */
+  .card-futuristic {
+    @apply bg-white dark:bg-slate-800/80 rounded-xl shadow-lg dark:shadow-slate-700/10 
+           border border-slate-100 dark:border-slate-700/50 overflow-hidden
+           transition-all duration-500 hover:shadow-xl hover:-translate-y-1 
+           dark:hover:shadow-cyan-500/5;
+  }
+  
+  /* Interactive button with hover effect */
+  .interactive-button {
+    @apply relative overflow-hidden rounded-full inline-flex items-center justify-center
+           px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-medium
+           transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/30
+           transform hover:scale-105;
+  }
+  
+  /* Text with gradient */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-500;
+  }
+
+  /* Section with dark background */
+  .section-dark {
+    @apply bg-slate-900 dark:bg-slate-950 text-white;
+  }
+
+  /* Section with light background */
+  .section-light {
+    @apply bg-lighter;
+  }
+
+  .section-lighter {
+    @apply bg-white;
+  }
+
+  /* Larger touch targets for mobile */
+  .mobile-touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+  
+  /* Improved mobile buttons */
+  .btn-mobile {
+    @apply py-4 px-6 rounded-full;
+  }
+
+  /* Service card improvements */
+  .service-card {
+    @apply bg-[#111c30] border border-[#1e304d] rounded-xl overflow-hidden hover:shadow-lg 
+           hover:shadow-[#4dc8e7]/10 transition-all duration-300;
+  }
+  
+  /* Back to top button - Position in top-right corner completely away from chat icon */
+  .back-to-top {
+    @apply fixed z-50 p-3 rounded-full bg-[#111c30] text-white shadow-lg opacity-0
+           transition-all duration-300 hover:bg-[#1c2c44];
+    visibility: hidden;
+    right: 1.5rem; /* Position on right side */
+    top: 5.5rem; /* Position at top below header */
+  }
+  
+  .back-to-top.visible {
+    @apply opacity-100;
+    visibility: visible;
+  }
+
+  /* Live chat container - explicitly positioned at bottom-right */
+  .live-chat-container {
+    @apply fixed z-40 right-4 bottom-4;
+  }
+}
+
+/* Custom animations */
+/* ...existing code... */
+
+/* Reduce motion for users who prefer it */
+/* ...existing code... */
+
+/* Focus styles for interactive elements with mouse/touch */
+/* ...existing code... */
+
+/* Loading animation */
+/* ...existing code... */
+
+/* Add improvement for button loading states */
+.btn-loading {
+  @apply relative overflow-hidden;
+}
+
+.btn-loading::after {
+  content: "";
+  @apply absolute inset-0 bg-white/20 animate-pulse;
+}
+
+/* Add print styles for better PDF exports */
+@media print {
+  body {
+    @apply bg-white text-black;
+  }
+  
+  section:not(#pricing) {
+    display: none !important;
+  }
+  
+  #pricing {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* New animation for skeletons and better loading states */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-100%);
+  animation: shimmer 2s infinite;
+}
+
+.dark .animate-shimmer::after {
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 20%,
+    rgba(255, 255, 255, 0.1) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+/* Add styles for draggable chat button */
+.draggable-handle {
+  touch-action: none;
+  cursor: move;
+}
+
+/* Add helper styles for button */
+.chat-drag-indicator {
+  @apply absolute -top-6 left-1/2 -translate-x-1/2 bg-cyan-500/80 hover:bg-cyan-500 
+         text-white p-1 rounded-t-lg cursor-move opacity-0 group-hover:opacity-100 
+         transition-opacity duration-200 z-10;
+}
+
+/* Add these gallery-specific light theme classes */
+.gallery-item-light {
+  @apply bg-white border border-[#eaf0ff] shadow-sm rounded-xl overflow-hidden;
+}
+
+.gallery-nav-light {
+  @apply bg-white border border-[#d1e6ff] text-slate-700 shadow-sm hover:bg-cyan-50;
+}
+
+.pagination-dot-light {
+  @apply bg-slate-300 hover:bg-slate-400;
+}
+
+.pagination-dot-active-light {
+  @apply bg-[#4dc8e7];
+}
+
+/* Custom class to avoid overlapping UI elements */
+.avoid-overlap {
+  pointer-events: none; /* This makes the container not block other elements' mouse events */
+}
+.avoid-overlap > * {
+  pointer-events: auto; /* But allows direct children to receive events */
+}
+
+/* Specific styles to ensure the chat button stays in its corner */
+.chat-button {
+  @apply fixed bottom-4 right-4 z-40;
+}
