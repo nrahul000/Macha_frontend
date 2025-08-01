@@ -44,6 +44,11 @@ export const getProduct = async (productId) => {
   }
 };
 
+// Get a single product by ID (alias for getProduct)
+export const getProductById = async (productId) => {
+  return getProduct(productId);
+};
+
 // Get all categories
 export const getCategories = async (params = {}) => {
   try {
@@ -62,6 +67,19 @@ export const getCategory = async (categoryId) => {
     return response.data;
   } catch (error) {
     console.error('Error fetching category details:', error);
+    throw error;
+  }
+};
+
+// Get products by category
+export const getProductsByCategory = async (categoryId) => {
+  try {
+    const response = await axios.get(`${GROCERY_API}/products`, {
+      params: { category: categoryId }
+    });
+    return response.data.products || response.data;
+  } catch (error) {
+    console.error('Error fetching products by category:', error);
     throw error;
   }
 };
